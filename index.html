@@ -11,7 +11,7 @@
    --bg-color：最外面的深色背景
    --dot-color：外面背景上的小圓點
    --container-bg：中間白色的主體 */
-:root{--bg-color:#141417;--dot-color:#22222b;--container-bg:#fdfcfb;--text-color:#2b2b2b;--accent-burgundy:rgb(112,48,72);--accent-burgundy-hover:rgb(88,35,56);--accent-blue:rgb(40,51,99);--border-color:#d8cec3;--sub-text:#666}
+:root{--bg-color:#393a40;--dot-color:#22222b;--container-bg:#fdfcfb;--text-color:#2b2b2b;--accent-burgundy:rgb(112,48,72);--accent-burgundy-hover:rgb(88,35,56);--accent-blue:rgb(40,51,99);--border-color:#d8cec3;--sub-text:#666}
 body{background-color:var(--bg-color);color:var(--text-color);font-family:'Noto Serif TC',serif;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:30px 15px 30px 60px;background-image:radial-gradient(var(--dot-color) 1.5px,transparent 1.5px);background-size:28px 28px;overflow-x:hidden}
 .site-wrapper{position:relative;width:100%;max-width:1050px;background:var(--container-bg);border-radius:8px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 0 5px #1d1d24;display:flex;min-height:620px;border:2px solid var(--accent-burgundy)}
 .site-wrapper::before{content:'';position:absolute;inset:5px;border:2px dashed #b8b2ac;pointer-events:none;border-radius:4px}
@@ -26,10 +26,12 @@ body{background-color:var(--bg-color);color:var(--text-color);font-family:'Noto 
 @keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 h2.section-title{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--accent-burgundy);margin-bottom:18px;padding-bottom:8px;border-bottom:2px solid #b8b2ac;letter-spacing:1px}
 .rich-text p{line-height:1.8;margin-bottom:14px;color:var(--text-color);font-size:.95rem}
-.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}
-.home-visual{position:relative;background:#f4efe9;border:1px dashed #b8b2ac;min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--sub-text);border-radius:4px;overflow:hidden}
-.home-visual img{max-width:100%;max-height:62vh;width:auto;height:auto;object-fit:contain;cursor:zoom-in}
-.home-intro h1{font-size:1.9rem;color:var(--accent-burgundy);margin-bottom:8px;font-family:'Cinzel',serif}
+.home-grid{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center}
+.home-visual{display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--sub-text)}
+.home-visual img{display:block;max-width:min(440px,100%);max-height:calc(75vh - 120px);width:auto;height:auto;border-radius:6px;box-shadow:0 8px 24px rgba(112,48,72,.2);cursor:zoom-in}
+.home-intro h1{font-size:2.4rem;line-height:1.15;letter-spacing:1px;color:var(--accent-burgundy);margin-bottom:18px;font-family:'Cinzel',serif}
+.home-intro .rich-text p{font-size:1rem}
+.home-intro .rich-text p.note{font-size:.8rem;color:var(--sub-text);margin-top:22px;padding-top:14px;border-top:1px dashed var(--border-color)}
 .home-intro .tag{display:inline-block;background:var(--accent-blue);color:#fff;padding:3px 10px;font-size:.78rem;border-radius:20px;margin-bottom:12px;font-weight:600}
 .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px;margin-top:15px}
 .card-item{background:#f7f3ee;border:1px solid var(--border-color);padding:12px;border-radius:4px;text-align:center;transition:all .2s;cursor:pointer}
@@ -61,7 +63,7 @@ body{padding:30px 15px}
 .sidebar-tabs{position:static;flex-direction:row;flex-wrap:wrap;justify-content:center;padding:10px;background:#f4efe9;border-bottom:1px solid var(--border-color)}
 .tab-btn{writing-mode:horizontal-tb;border-radius:4px;padding:6px 10px}
 .content-container{padding:25px 20px;max-height:none}
-.home-grid{grid-template-columns:1fr}
+.home-grid{grid-template-columns:1fr;gap:28px}
 }
 </style>
 </head>
@@ -92,7 +94,7 @@ body{padding:30px 15px}
           <div id="home-intro-content" class="rich-text">
             <p>同人夢向創作 | 轟燈矢（荼毘）x 莉莉絲</p>
             <p>若無標註繪師皆為自繪</p>
-            <p style="font-size:.8rem;color:var(--sub-text)">注意：兩人為遠親，雷者自行迴避</p>
+            <p class="note">注意：兩人為遠親，雷者自行迴避</p>
           </div>
           <p id="load-error" style="font-size:.8rem;color:var(--accent-burgundy)" hidden></p>
         </div>
