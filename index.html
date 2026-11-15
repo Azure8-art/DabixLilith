@@ -7,8 +7,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-:root{--bg-color:#141417;--container-bg:#fdfcfb;--text-color:#2b2b2b;--accent-burgundy:rgb(112,48,72);--accent-burgundy-hover:rgb(88,35,56);--accent-blue:rgb(40,51,99);--border-color:#d8cec3;--sub-text:#666}
-body{background-color:var(--bg-color);color:var(--text-color);font-family:'Noto Serif TC',serif;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:30px 15px 30px 60px;background-image:radial-gradient(#22222b 1.5px,transparent 1.5px);background-size:28px 28px;overflow-x:hidden}
+/* ====== 想改顏色就改這裡（只改 # 開頭的色碼）======
+   --bg-color：最外面的深色背景
+   --dot-color：外面背景上的小圓點
+   --container-bg：中間白色的主體 */
+:root{--bg-color:#141417;--dot-color:#22222b;--container-bg:#fdfcfb;--text-color:#2b2b2b;--accent-burgundy:rgb(112,48,72);--accent-burgundy-hover:rgb(88,35,56);--accent-blue:rgb(40,51,99);--border-color:#d8cec3;--sub-text:#666}
+body{background-color:var(--bg-color);color:var(--text-color);font-family:'Noto Serif TC',serif;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:30px 15px 30px 60px;background-image:radial-gradient(var(--dot-color) 1.5px,transparent 1.5px);background-size:28px 28px;overflow-x:hidden}
 .site-wrapper{position:relative;width:100%;max-width:1050px;background:var(--container-bg);border-radius:8px;box-shadow:0 20px 40px rgba(0,0,0,.6),0 0 0 5px #1d1d24;display:flex;min-height:620px;border:2px solid var(--accent-burgundy)}
 .site-wrapper::before{content:'';position:absolute;inset:5px;border:2px dashed #b8b2ac;pointer-events:none;border-radius:4px}
 .site-wrapper::after{content:'';position:absolute;inset:10px;border:1px solid rgba(112,48,72,.15);pointer-events:none;border-radius:3px;background-image:radial-gradient(#8c857b 1px,transparent 1px);background-size:12px 12px;opacity:.12}
@@ -23,8 +27,8 @@ body{background-color:var(--bg-color);color:var(--text-color);font-family:'Noto 
 h2.section-title{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--accent-burgundy);margin-bottom:18px;padding-bottom:8px;border-bottom:2px solid #b8b2ac;letter-spacing:1px}
 .rich-text p{line-height:1.8;margin-bottom:14px;color:var(--text-color);font-size:.95rem}
 .home-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}
-.home-visual{position:relative;background:#f4efe9;border:1px dashed #b8b2ac;height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--sub-text);border-radius:4px;overflow:hidden}
-.home-visual img{width:100%;height:100%;object-fit:cover}
+.home-visual{position:relative;background:#f4efe9;border:1px dashed #b8b2ac;min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--sub-text);border-radius:4px;overflow:hidden}
+.home-visual img{max-width:100%;max-height:62vh;width:auto;height:auto;object-fit:contain;cursor:zoom-in}
 .home-intro h1{font-size:1.9rem;color:var(--accent-burgundy);margin-bottom:8px;font-family:'Cinzel',serif}
 .home-intro .tag{display:inline-block;background:var(--accent-blue);color:#fff;padding:3px 10px;font-size:.78rem;border-radius:20px;margin-bottom:12px;font-weight:600}
 .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px;margin-top:15px}
@@ -35,6 +39,7 @@ h2.section-title{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--accent-
 .avatar-box{width:360px;max-width:100%;min-height:220px;background:#e8e0d5;border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--sub-text);font-size:.8rem}
 .avatar-box img{width:100%;height:auto;display:block;cursor:zoom-in}
 .modal-box img{max-height:75vh;object-fit:contain}
+.modal-box img.full{max-height:none}
 .timeline-item{border-left:2px solid var(--accent-burgundy);padding-left:18px;margin-bottom:20px;position:relative}
 .timeline-item::before{content:'◆';position:absolute;left:-7px;top:0;color:var(--accent-burgundy);font-size:12px;background:var(--container-bg)}
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(15,15,20,.8);z-index:200;justify-content:center;align-items:center;padding:20px}
@@ -46,6 +51,7 @@ h2.section-title{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--accent-
 .pet-flip{width:100%;height:100%;animation:petFlip 40s step-end infinite}
 .pet-flip img{width:100%;height:100%;object-fit:contain;animation:petBounce .8s ease-in-out infinite alternate}
 @keyframes petWalk{from{left:5%}to{left:calc(100% - 130px)}}
+/* 圖片原本朝左：往右走（前半段）要翻面。若換成朝右的圖，把下面的 -1 和 1 對調 */
 @keyframes petFlip{0%{transform:scaleX(-1)}50%{transform:scaleX(1)}}
 @keyframes petBounce{from{transform:translateY(0)}to{transform:translateY(-6px)}}
 @media (prefers-reduced-motion:reduce){.pet-container,.pet-flip,.pet-flip img,.tab-content{animation:none}}
@@ -76,7 +82,7 @@ body{padding:30px 15px}
   <main class="content-container">
     <section id="tab-home" class="tab-content active">
       <div class="home-grid">
-        <div class="home-visual" id="live2d-stage">
+        <div class="home-visual" id="live2d-stage" data-kind="home" data-i="0">
           <div>[ Live2D / 主視覺插畫 ]</div>
           <small>支援動態展示與立繪切換</small>
         </div>
@@ -146,7 +152,7 @@ body{padding:30px 15px}
   </div>
 </div>
 
-<!-- 小桌寵：把 src 裡的檔名改成你放在 image 資料夾裡的 PNG，圖片載入成功才會出現 -->
+<!-- 小桌寵：把 src 裡的檔名改成你放在 images 資料夾裡的 PNG，圖片載入成功才會出現 -->
 <div class="pet-container" id="pet" hidden>
   <div class="pet-flip"><img id="pet-img" src="images/pet.PNG" alt="燈矢與莉莉絲桌寵" onload="document.getElementById('pet').hidden=false"></div>
 </div>
@@ -155,7 +161,7 @@ body{padding:30px 15px}
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const img = (src, alt, cls = '') => src ? `<img src="${esc(src)}" alt="${esc(alt)}" class="${cls}">` : '';
-const store = { avatar: [], novels: [], comics: [], gallery: [] };
+const store = { home: [], avatar: [], novels: [], comics: [], gallery: [] };
 
 function switchTab(tabId, btn) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -183,6 +189,7 @@ document.addEventListener('click', e => {
   const it = (store[card.dataset.kind] || [])[card.dataset.i];
   if (!it) return;
   if (card.dataset.kind === 'avatar') openModal(it.title, img(it.image, it.title, 'w-full rounded'));
+  if (card.dataset.kind === 'home') openModal(it.title, img(it.image, it.title, 'w-full rounded full'));
   if (card.dataset.kind === 'novels') openModal(it.title, it.content || '');
   if (card.dataset.kind === 'comics') openModal(it.title, img(it.cover, it.title, 'w-full rounded mb-3') + `<p>${it.note || ''}</p>`);
   if (card.dataset.kind === 'gallery') openModal(it.title, img(it.image, it.title, 'w-full rounded'));
@@ -194,7 +201,10 @@ async function loadSiteData() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
 
-    if (data.home_image) $('live2d-stage').innerHTML = img(data.home_image, '主視覺插畫');
+    if (data.home_image) {
+      $('live2d-stage').innerHTML = img(data.home_image, '主視覺插畫');
+      store.home = [{ title: '主視覺', image: data.home_image }];
+    }
     if (data.home_intro) $('home-intro-content').innerHTML = data.home_intro;
     if (data.lilith_avatar) {
       $('lilith-avatar-box').innerHTML = img(data.lilith_avatar, '莉莉絲立繪');
