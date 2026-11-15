@@ -1,0 +1,81 @@
+media:
+  input: images
+  output: images
+
+content:
+  - name: site_data
+    label: 網站內容管理 (夢文 / 畫廊 / 漫畫 / 時間線)
+    type: file
+    path: data.json
+    fields:
+      - name: home_image
+        label: 主頁視覺插畫 (若未放 Live2D 時顯示)
+        type: image
+      - name: home_intro
+        label: 主頁簡介文字
+        type: rich-text
+      - name: lilith_avatar
+        label: 莉莉絲立繪 / 大頭貼
+        type: image
+      - name: lilith_profile
+        label: 莉莉絲角色設定 (Character Profile)
+        type: rich-text
+      - name: claude_info
+        label: 克勞德家族設定 (Claude Family)
+        type: rich-text
+      - name: cp_dynamics
+        label: 相處CP與關係張力 (Relationship & Dynamics)
+        type: rich-text
+      - name: timeline
+        label: 時間線節點 (Timeline)
+        type: object
+        list: true
+        fields:
+          - name: date
+            label: 時間 / 階段
+            type: string
+          - name: title
+            label: 事件標題
+            type: string
+          - name: desc
+            label: 事件經過
+            type: text
+      - name: novels
+        label: 短篇小說與對話 (Short Stories)
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: 文章標題
+            type: string
+          - name: summary
+            label: 簡介 / 摘要
+            type: string
+          - name: content
+            label: 文章內文
+            type: rich-text
+      - name: comics
+        label: 短篇漫畫與格漫 (Comics)
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: 漫畫標題
+            type: string
+          - name: cover
+            label: 漫畫圖片
+            type: image
+          - name: note
+            label: 創作備註
+            type: string
+      - name: gallery
+        label: 插畫與賀圖收藏 (Gallery)
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: 作品標題 / 繪師標註
+            type: string
+          - name: image
+            label: 插畫圖片
+            type: image
