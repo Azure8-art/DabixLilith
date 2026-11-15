@@ -1,4 +1,5 @@
 {
+  "home_image": "images/tarot01.png",
   "lilith_avatar": "images/lilith_s7.png",
   "lilith_profile": "幹你娘 施工中",
   "claude_info": "在這裡填寫克勞德家族的背景介紹...",
@@ -15,6 +16,12 @@
       "title": "範例短篇：夜色下的低語",
       "summary": "點擊卡片即可閱讀完整文章內容。",
       "content": "這是文章的完整內容，支援分段與排版。"
+    }
+  ],
+  "gallery": [
+    {
+      "title": "漫畫",
+      "image": "images/manga01.png"
     }
   ]
 }
