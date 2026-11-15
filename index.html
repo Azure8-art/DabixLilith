@@ -46,7 +46,7 @@ h2.section-title{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--accent-
 .pet-flip{width:100%;height:100%;animation:petFlip 40s step-end infinite}
 .pet-flip img{width:100%;height:100%;object-fit:contain;animation:petBounce .8s ease-in-out infinite alternate}
 @keyframes petWalk{from{left:5%}to{left:calc(100% - 130px)}}
-@keyframes petFlip{0%{transform:scaleX(1)}50%{transform:scaleX(-1)}}
+@keyframes petFlip{0%{transform:scaleX(-1)}50%{transform:scaleX(1)}}
 @keyframes petBounce{from{transform:translateY(0)}to{transform:translateY(-6px)}}
 @media (prefers-reduced-motion:reduce){.pet-container,.pet-flip,.pet-flip img,.tab-content{animation:none}}
 @media (max-width:768px){
