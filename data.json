@@ -1,0 +1,24 @@
+{
+  "home_image": "",
+  "home_intro": "<p>歡迎來到 <strong>Lilith & Touya</strong> 的專屬空間。</p>",
+  "lilith_avatar": "",
+  "lilith_profile": "<p>在這裡填寫莉莉絲的詳細角色設定...</p>",
+  "claude_info": "<p>在這裡填寫克勞德家族的背景介紹...</p>",
+  "cp_dynamics": "<p>記錄兩人之間的相處模式與羈絆...</p>",
+  "timeline": [
+    {
+      "date": "最初的相遇",
+      "title": "命運交會的開端",
+      "desc": "在後台可以隨時新增更多時間線節點。"
+    }
+  ],
+  "novels": [
+    {
+      "title": "範例短篇：夜色下的低語",
+      "summary": "點擊卡片即可閱讀完整文章內容。",
+      "content": "<p>這是文章的完整內容，支援分段與排版。</p>"
+    }
+  ],
+  "comics": [],
+  "gallery": []
+}
