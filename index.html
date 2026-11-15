@@ -78,9 +78,13 @@ body{padding:30px 15px}
           <small>支援動態展示與立繪切換</small>
         </div>
         <div class="home-intro">
-          <span class="tag">LILITH &amp; TOUYA</span>
-          <h1>Lilith &amp; Touya</h1>
-          <div id="home-intro-content" class="rich-text">載入中...</div>
+          <span class="tag">My Hero Academia • 荼毘夢向</span>
+          <h1>TOUYA &amp; LILITH</h1>
+          <div id="home-intro-content" class="rich-text">
+            <p>同人夢向創作 | 轟燈矢（荼毘）x 莉莉絲</p>
+            <p style="font-size:.8rem;color:var(--sub-text)">注意：兩人為遠親，雷者自行迴避</p>
+          </div>
+          <p id="load-error" style="font-size:.8rem;color:var(--accent-burgundy)" hidden></p>
         </div>
       </div>
     </section>
@@ -138,9 +142,9 @@ body{padding:30px 15px}
   </div>
 </div>
 
-<!-- 小桌寵（在 data.json 填 pet_image 後才會出現） -->
+<!-- 小桌寵：把 src 裡的檔名改成你放在 image 資料夾裡的 PNG，圖片載入成功才會出現 -->
 <div class="pet-container" id="pet" hidden>
-  <div class="pet-flip"><img id="pet-img" alt="燈矢與莉莉絲桌寵"></div>
+  <div class="pet-flip"><img id="pet-img" src="image/pet.png" alt="燈矢與莉莉絲桌寵" onload="document.getElementById('pet').hidden=false"></div>
 </div>
 
 <script>
@@ -185,16 +189,13 @@ async function loadSiteData() {
     const data = await res.json();
 
     if (data.home_image) $('live2d-stage').innerHTML = img(data.home_image, '主視覺插畫');
-    $('home-intro-content').innerHTML = data.home_intro || '';
+    if (data.home_intro) $('home-intro-content').innerHTML = data.home_intro;
     if (data.lilith_avatar) $('lilith-avatar-box').innerHTML = img(data.lilith_avatar, '莉莉絲立繪');
     $('lilith-profile-content').innerHTML = data.lilith_profile || '';
     $('claude-content').innerHTML = data.claude_info || '';
     $('cp-content').innerHTML = data.cp_dynamics || '';
 
-    if (data.pet_image) {
-      $('pet-img').src = data.pet_image;
-      $('pet').hidden = false;
-    }
+    if (data.pet_image) $('pet-img').src = data.pet_image;
 
     $('timeline-list').innerHTML = (data.timeline || []).map(item => `
       <div class="timeline-item">
@@ -226,7 +227,8 @@ async function loadSiteData() {
       </div>`).join('');
   } catch (err) {
     console.error('讀取 data.json 失敗:', err);
-    $('home-intro-content').textContent = '讀取不到 data.json。請確認它和 index.html 放在同一層，並用網址（http/https）開啟，而不是直接點兩下 HTML 檔。';
+    $('load-error').textContent = '讀取不到 data.json。請確認它和 index.html 放在同一層，並用網址（http/https）開啟，而不是直接點兩下 HTML 檔。';
+    $('load-error').hidden = false;
   }
 }
 loadSiteData();
