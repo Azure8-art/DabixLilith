@@ -32,6 +32,9 @@ h2.section-title{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--accent-
 .card-item:hover{transform:translateY(-2px);border-color:var(--accent-burgundy);background:#fff;box-shadow:0 4px 12px rgba(112,48,72,.15)}
 .card-img-box{height:150px;background:#e8e0d5;margin-bottom:10px;display:flex;align-items:center;justify-content:center;color:var(--sub-text);font-size:.8rem;border-radius:2px;overflow:hidden}
 .card-img-box img{width:100%;height:100%;object-fit:cover}
+.avatar-box{width:360px;max-width:100%;min-height:220px;background:#e8e0d5;border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--sub-text);font-size:.8rem}
+.avatar-box img{width:100%;height:auto;display:block;cursor:zoom-in}
+.modal-box img{max-height:75vh;object-fit:contain}
 .timeline-item{border-left:2px solid var(--accent-burgundy);padding-left:18px;margin-bottom:20px;position:relative}
 .timeline-item::before{content:'◆';position:absolute;left:-7px;top:0;color:var(--accent-burgundy);font-size:12px;background:var(--container-bg)}
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(15,15,20,.8);z-index:200;justify-content:center;align-items:center;padding:20px}
@@ -92,7 +95,7 @@ body{padding:30px 15px}
     <section id="tab-lilith" class="tab-content">
       <h2 class="section-title">Character Profile</h2>
       <div class="flex flex-wrap gap-6">
-        <div id="lilith-avatar-box" class="card-img-box" style="width:200px;height:260px">立繪 / 大頭貼</div>
+        <div id="lilith-avatar-box" class="avatar-box" data-kind="avatar" data-i="0">立繪 / 大頭貼</div>
         <div id="lilith-profile-content" class="rich-text flex-1" style="min-width:220px"></div>
       </div>
     </section>
@@ -151,7 +154,7 @@ body{padding:30px 15px}
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const img = (src, alt, cls = '') => src ? `<img src="${esc(src)}" alt="${esc(alt)}" class="${cls}">` : '';
-const store = { novels: [], comics: [], gallery: [] };
+const store = { avatar: [], novels: [], comics: [], gallery: [] };
 
 function switchTab(tabId, btn) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -176,7 +179,9 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 document.addEventListener('click', e => {
   const card = e.target.closest('[data-kind]');
   if (!card) return;
-  const it = store[card.dataset.kind][card.dataset.i];
+  const it = (store[card.dataset.kind] || [])[card.dataset.i];
+  if (!it) return;
+  if (card.dataset.kind === 'avatar') openModal(it.title, img(it.image, it.title, 'w-full rounded'));
   if (card.dataset.kind === 'novels') openModal(it.title, it.content || '');
   if (card.dataset.kind === 'comics') openModal(it.title, img(it.cover, it.title, 'w-full rounded mb-3') + `<p>${it.note || ''}</p>`);
   if (card.dataset.kind === 'gallery') openModal(it.title, img(it.image, it.title, 'w-full rounded'));
@@ -190,7 +195,10 @@ async function loadSiteData() {
 
     if (data.home_image) $('live2d-stage').innerHTML = img(data.home_image, '主視覺插畫');
     if (data.home_intro) $('home-intro-content').innerHTML = data.home_intro;
-    if (data.lilith_avatar) $('lilith-avatar-box').innerHTML = img(data.lilith_avatar, '莉莉絲立繪');
+    if (data.lilith_avatar) {
+      $('lilith-avatar-box').innerHTML = img(data.lilith_avatar, '莉莉絲立繪');
+      store.avatar = [{ title: '莉莉絲', image: data.lilith_avatar }];
+    }
     $('lilith-profile-content').innerHTML = data.lilith_profile || '';
     $('claude-content').innerHTML = data.claude_info || '';
     $('cp-content').innerHTML = data.cp_dynamics || '';
